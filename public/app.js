@@ -1,6 +1,5 @@
 /* Global Variables */
-//Weather API
-//d7d5f6e358b6ae754ddaec7f01f9da0c
+const appid = 'd7d5f6e358b6ae754ddaec7f01f9da0c';
 
 // Create a new date instance dynamically
 // const d = new Date();
@@ -13,15 +12,24 @@
 
 // today = mm + '/' + dd + '/' + yyyy;
 
+// Personal API Key for OpenWeatherMap API
+// Event listener to add function to existing HTML DOM element
+/* Function called by event listener */
+/* Function to GET Web API Data*/
+/* Function to POST data */
+/* Function to GET Project Data */
+
 const generate = document.getElementById('generate');
 
 generate.addEventListener('click', async () => {
+    const zip = document.getElementById('zip');
+    console.log(zip.value);
 });
 
 const getWeather = () => {
 };
 
-const addEntry = () => {
+const addEntry = async () => {
     const payload = {
         'zip': 'zip-code'
     };
@@ -42,6 +50,3 @@ const addEntry = () => {
 
 const getEntries = () => {
 };
-
-
-
