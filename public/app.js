@@ -1,4 +1,6 @@
 /* Global Variables */
+//Weather API
+//d7d5f6e358b6ae754ddaec7f01f9da0c
 
 // Create a new date instance dynamically
 // const d = new Date();
@@ -14,6 +16,12 @@
 const generate = document.getElementById('generate');
 
 generate.addEventListener('click', async () => {
+});
+
+const getWeather = () => {
+};
+
+const addEntry = () => {
     const payload = {
         'zip': 'zip-code'
     };
@@ -30,4 +38,10 @@ generate.addEventListener('click', async () => {
     catch(error) {
         console.log(`Error: ${error}`);
     }
-});
+};
+
+const getEntries = () => {
+};
+
+
+

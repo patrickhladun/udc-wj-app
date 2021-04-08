@@ -1,5 +1,3 @@
-//Weather API
-//d7d5f6e358b6ae754ddaec7f01f9da0c
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
