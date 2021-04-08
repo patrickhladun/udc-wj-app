@@ -1,5 +1,4 @@
-/* Global Variables */
-const appid = 'd7d5f6e358b6ae754ddaec7f01f9da0c';
+
 
 // Create a new date instance dynamically
 // const d = new Date();
@@ -22,30 +21,37 @@ const appid = 'd7d5f6e358b6ae754ddaec7f01f9da0c';
 const generate = document.getElementById('generate');
 
 generate.addEventListener('click', async () => {
-    const zip = document.getElementById('zip');
-    console.log(zip.value);
+    getWeather();
 });
 
 const getWeather = () => {
+    const zip = document.getElementById('zip').value;
+    const appid = 'd7d5f6e358b6ae754ddaec7f01f9da0c';
+    const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${appid}`;
+    
+    fetch(url)
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(error => console.log(`Error: ${error}`));
 };
 
-const addEntry = async () => {
-    const payload = {
-        'zip': 'zip-code'
-    };
-    const resp = await fetch('/entry', {
-        method: 'POST',
-        credentials: 'same-origin',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
-    }) 
-    try {
-        const response = await resp.json();
-        return response;
-    }
-    catch(error) {
-        console.log(`Error: ${error}`);
-    }
+const addEntry = () => {
+    // const payload = {
+    //     'zip': 'zip-code'
+    // };
+    // const resp = fetch('/entry', {
+    //     method: 'POST',
+    //     credentials: 'same-origin',
+    //     headers: { 'Content-Type': 'application/json' },
+    //     body: JSON.stringify(payload)
+    // }) 
+    // try {
+    //     const response = resp.json();
+    //     return response;
+    // }
+    // catch(error) {
+    //     console.log(`Error: ${error}`);
+    // }
 };
 
 const getEntries = () => {
