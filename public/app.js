@@ -1,3 +1,4 @@
+const apiKey = '&appid=d7d5f6e358b6ae754ddaec7f01f9da0c&units=metric';
 const button = document.getElementById('generate');
 const zip = document.getElementById('zip');
 const feelings = document.getElementById('feelings');
@@ -13,8 +14,7 @@ button.addEventListener('click', async (e) => {
 
 // Connect to Open Weather Map API and fetch weather info based on user input
 const getWeather = async () => {
-    const appid = 'd7d5f6e358b6ae754ddaec7f01f9da0c';
-    const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip.value}&appid=${appid}`;
+    const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip.value}${apiKey}`;
     const d = new Date();
     const newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
@@ -54,7 +54,7 @@ const getEntries = () => {
 // Update UI with the last entry
 const updateUI = (data) => {
     const { name, newDate, main, feelings } = data;
-    const temp = (main.temp - 273.15).toFixed(0);
+    const temp = main.temp.toFixed(0);
 
     document.getElementById('date').innerHTML = `Date: ${newDate}`;
     document.getElementById('city').innerHTML = `City: ${name}`;
