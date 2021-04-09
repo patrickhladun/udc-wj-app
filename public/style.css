@@ -1,0 +1,8 @@
+#app {
+    width: 400px;
+}
+.zip, .feel, .entry {
+    display: flex;
+    flex-direction: column;
+}
+ 

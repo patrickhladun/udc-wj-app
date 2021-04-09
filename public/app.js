@@ -11,6 +11,7 @@ button.addEventListener('click', async (e) => {
     }
 });
 
+// Connect to Open Weather Map API and fetch weather info based on user input
 const getWeather = async () => {
     const appid = 'd7d5f6e358b6ae754ddaec7f01f9da0c';
     const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip.value}&appid=${appid}`;
@@ -29,6 +30,7 @@ const getWeather = async () => {
     .catch(error => console.log(`Error: ${error}`));
 };
 
+// Send the data to the backend
 const addEntry = (data) => {
     const payload = data;
     fetch('/entry', {
@@ -41,6 +43,7 @@ const addEntry = (data) => {
     .catch(error => console.log(`Error: ${error}`));
 };
 
+// Get entries from the backend
 const getEntries = () => {
     fetch('/entry')
     .then(response => response.json())
@@ -48,10 +51,13 @@ const getEntries = () => {
     .catch(error => console.log(`Error: ${error}`));
 };
 
+// Update UI with the last entry
 const updateUI = (data) => {
     const { name, newDate, main, feelings } = data;
-    document.getElementById('date').innerHTML = newDate;
-    document.getElementById('city').innerHTML = name;
-    document.getElementById('temp').innerHTML = main.temp;
-    document.getElementById('content').innerHTML = feelings;
+    const temp = (main.temp - 273.15).toFixed(0);
+
+    document.getElementById('date').innerHTML = `Date: ${newDate}`;
+    document.getElementById('city').innerHTML = `City: ${name}`;
+    document.getElementById('temp').innerHTML = `Temperature: ${temp}°C`;
+    document.getElementById('content').innerHTML = `My feelings: ${feelings}`;
 }
