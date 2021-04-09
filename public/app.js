@@ -1,23 +1,31 @@
 const button = document.getElementById('generate');
+const zip = document.getElementById('zip');
+const feelings = document.getElementById('feelings');
 
 button.addEventListener('click', async (e) => {
     e.preventDefault();
-    await getWeather();
-    getEntries();
+
+    if(zip.value && feelings.value) {
+        await getWeather();
+        getEntries();
+    }
 });
 
 const getWeather = async () => {
-    const zip = document.getElementById('zip').value;
-    const feelings = document.getElementById('feelings').value;
     const appid = 'd7d5f6e358b6ae754ddaec7f01f9da0c';
-    const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${appid}`;
-
+    const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip.value}&appid=${appid}`;
     const d = new Date();
     const newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
+    const userData = {
+        zip: zip.value,
+        feelings: feelings.value,
+        newDate
+    }
+
     await fetch(url)
     .then(response => response.json())
-    .then(data => addEntry({...data, zip, feelings, newDate}))
+    .then(data => addEntry({...data, ...userData}))
     .catch(error => console.log(`Error: ${error}`));
 };
 
