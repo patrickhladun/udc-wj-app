@@ -1,4 +1,4 @@
-const apiKey = '&appid=d7d5f6e358b6ae754ddaec7f01f9da0c&units=metric';
+const apiKey = '&appid=<API_KEY>&units=metric';
 const button = document.getElementById('generate');
 const zip = document.getElementById('zip');
 const feelings = document.getElementById('feelings');
