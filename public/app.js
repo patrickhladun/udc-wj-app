@@ -16,7 +16,7 @@ button.addEventListener('click', async (e) => {
 const getWeather = async () => {
     const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip.value}${apiKey}`;
     const d = new Date();
-    const newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+    let newDate = d.getMonth() + 1 + '.' + d.getDate() + '.' + d.getFullYear();
 
     const userData = {
         zip: zip.value,
