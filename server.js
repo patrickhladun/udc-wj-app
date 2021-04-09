@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const { response } = require('express');
 
 const app = express();
 
@@ -13,12 +14,12 @@ const server = app.listen(port, () => console.log(`Running on port: ${port}`));
 
 app.use(express.static('public'));
 
-const entry = {};
+let projectData = {};
 
 app.get('/entry', (req, res) => {
-    console.log(req.body);
+    res.send(projectData);
 });
 
 app.post('/entry', (req, res) => {
-    console.log(req.body);
+    projectData = req.body;
 });

@@ -1,59 +1,49 @@
-// Create a new date instance dynamically
-// const d = new Date();
-// const newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
+const button = document.getElementById('generate');
 
-// let today = new Date();
-// const dd = String(today.getDate()).padStart(2, '0');
-// const mm = String(today.getMonth() + 1).padStart(2, '0');2
-// const yyyy = today.getFullYear();
-
-// today = mm + '/' + dd + '/' + yyyy;
-
-// Personal API Key for OpenWeatherMap API
-// Event listener to add function to existing HTML DOM element
-/* Function called by event listener */
-/* Function to GET Web API Data*/
-/* Function to POST data */
-/* Function to GET Project Data */
-// TODO: Add data to an object on server side
-// TODO: Fetch all entries from the backend
-// TODO: Display the entries on the front end
-
-const generate = document.getElementById('generate');
-
-generate.addEventListener('click', async () => {
-    getWeather();
+button.addEventListener('click', async (e) => {
+    e.preventDefault();
+    await getWeather();
+    getEntries();
 });
 
-const getWeather = () => {
+const getWeather = async () => {
     const zip = document.getElementById('zip').value;
     const feelings = document.getElementById('feelings').value;
     const appid = 'd7d5f6e358b6ae754ddaec7f01f9da0c';
     const url = `https://api.openweathermap.org/data/2.5/weather?zip=${zip}&appid=${appid}`;
 
-    const form = {
-        zip,
-        feelings
-    }
+    const d = new Date();
+    const newDate = d.getMonth()+'.'+ d.getDate()+'.'+ d.getFullYear();
 
-    fetch(url)
+    await fetch(url)
     .then(response => response.json())
-    .then(data => addEntry({...data, ...form}))
+    .then(data => addEntry({...data, zip, feelings, newDate}))
     .catch(error => console.log(`Error: ${error}`));
 };
 
 const addEntry = (data) => {
     const payload = data;
-    const resp = fetch('/entry', {
+    fetch('/entry', {
         method: 'POST',
         credentials: 'same-origin',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(payload)
     }) 
     .then(response => response.json())
-    .then(data => console.log(data))
     .catch(error => console.log(`Error: ${error}`));
 };
 
 const getEntries = () => {
+    fetch('/entry')
+    .then(response => response.json())
+    .then(data => updateUI(data))
+    .catch(error => console.log(`Error: ${error}`));
 };
+
+const updateUI = (data) => {
+    const { name, newDate, main, feelings } = data;
+    document.getElementById('date').innerHTML = newDate;
+    document.getElementById('city').innerHTML = name;
+    document.getElementById('temp').innerHTML = main.temp;
+    document.getElementById('content').innerHTML = feelings;
+}
